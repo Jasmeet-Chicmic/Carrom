@@ -1,0 +1,61 @@
+{"data" : [
+{
+    "id":1,"color":"BLACK"
+},
+{
+    "id":2,"color":"WHITE"
+},
+{
+    "id":3,"color":"BLACK"
+},
+{
+    "id":4,"color":"WHITE"
+},
+{
+    "id":5,"color":"BLACK"
+},
+{
+    "id":6,"color":"WHITE"
+},
+{
+    "id":7,"color":"WHITE"
+},
+{
+    "id":8,"color":"BLACK"
+},
+{
+    "id":9,"color":"WHITE"
+},
+{
+    "id":10,"color":"RED"
+},
+{
+    "id":11,"color":"BLACK"
+},
+{
+    "id":12,"color":"BLACK"
+},
+{
+    "id":13,"color":"WHITE"
+},
+{
+    "id":14,"color":"BLACK"
+},
+{
+    "id":15,"color":"WHITE"
+},
+{
+    "id":16,"color":"WHITE"
+},
+{
+    "id":17,"color":"BLACK"
+},
+{
+    "id":18,"color":"WHITE"
+},
+{
+    "id":19,"color":"BLACK"
+}
+]
+
+}
