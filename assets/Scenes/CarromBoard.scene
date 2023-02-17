@@ -1387,7 +1387,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 20,
+    "_radius": 10,
     "_id": "acvOG7qfRF55UVO6A1T20r"
   },
   {
@@ -1549,7 +1549,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 20,
+    "_radius": 10,
     "_id": "77/mWyoshOY7ASUlLx5E7V"
   },
   {
@@ -1711,7 +1711,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 20,
+    "_radius": 10,
     "_id": "77qWL0LltPXqJrvZTLdL9g"
   },
   {
@@ -1768,7 +1768,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -622.325,
-      "y": 625.096,
+      "y": 622.326,
       "z": 0
     },
     "_lrot": {
@@ -1873,7 +1873,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 20,
+    "_radius": 10,
     "_id": "33vufVV25NYoRdyFQnfosA"
   },
   {
@@ -2996,14 +2996,14 @@
     "_allowSleep": true,
     "_gravityScale": 0,
     "_linearDamping": 0.9,
-    "_angularDamping": 0,
+    "_angularDamping": 0.9,
     "_linearVelocity": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
     "_angularVelocity": 0,
-    "_fixedRotation": true,
+    "_fixedRotation": false,
     "_id": "a8cif5NVFH5p3pzU1ue/MG"
   },
   {

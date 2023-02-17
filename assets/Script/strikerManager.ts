@@ -86,13 +86,9 @@ export class strikerManager extends Component {
     }
 
     update(deltaTime: number) {
-        if (this.angularVelocityCheck) {
-            let angularVelocity = this.node.getComponent(RigidBody2D).angularVelocity;
-            if (angularVelocity != 0) {
-                this.node.getComponent(RigidBody2D).angularVelocity = 0;
-            }
-        }
-
+        // if (this.node.getComponent(RigidBody2D).linearVelocity.x == 0 && this.node.getComponent(RigidBody2D).linearVelocity.y == 0) {
+        //     this.node.setPosition(-348.94, -461.517);
+        // }
     }
 }
 
