@@ -61,7 +61,7 @@ export class carrom extends Component {
         let x = gameLogoSize.x;
         x = x - 200;
         let y = gameLogoSize.y;
-        y = y - 200
+        y = y - 200;
         this.node.getChildByName('gameLogo').getComponent(UITransform).setContentSize(x, y);
 
     }

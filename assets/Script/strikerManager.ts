@@ -1,4 +1,4 @@
-import { BoxCollider2D, CircleCollider2D, Vec2 } from 'cc';
+import { BoxCollider2D, CircleCollider2D, Slider, Vec2, Collider2D } from 'cc';
 import { _decorator, Component, Input, Node, RigidBody, RigidBody2D, Vec3, PhysicsSystem2D, EPhysics2DDrawFlags } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -7,18 +7,34 @@ export class strikerManager extends Component {
     @property({ type: Node })
     TargetArea: Node = null;
 
+
+    @property({ type: Node })
+    slider = null;
     angularVelocityCheck = 0;
     cursorStartPos = null;
     cursorEndPos = null;
     yDifference = null;
     xDifference = null;
     angle = null;
+
+    reposition = false;
+
+    @property({ type: Node })
+    blackTopRightCollider = null;
+    @property({ type: Node })
+    blackBottomLeftCollider = null;
+    @property({ type: Node })
+    blackBottomRightCollider = null;
+    @property({ type: Node })
+    blackTopLeftCollider = null;
     onLoad() {
         this.node.name = "striker";
         this.node.on(Input.EventType.TOUCH_START, this.cursorPosition, this)
         this.node.on(Input.EventType.TOUCH_MOVE, this.cursorPosition, this);
         this.node.on(Input.EventType.TOUCH_CANCEL, this.cursorPosition, this);
         PhysicsSystem2D.instance.enable = true;
+
+
         // PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.All;
     }
 
@@ -42,13 +58,13 @@ export class strikerManager extends Component {
 
         } else if (event.type == "touch-cancel") {
             this.TargetArea.setScale(0, 0);
-            this.node.getComponent(RigidBody2D).linearVelocity = new Vec2(-this.xDifference, -this.yDifference);
+            this.node.getComponent(RigidBody2D).linearVelocity = new Vec2(-this.xDifference * 0.2, -this.yDifference * 0.2);
             this.node.getChildByName('hover_rotating').active = false;
             this.node.getChildByName('hover_green').active = false;
             this.TargetArea.getChildByName('target_area').active = false;
             this.TargetArea.getChildByName('target_arrow').active = false;
             this.TargetArea.getChildByName('front_direction').active = false;
-
+            this.reposition = true;
             if (this.node.getComponent(RigidBody2D).angularVelocity == 0) {
                 this.angularVelocityCheck = 0;
             } else {
@@ -83,12 +99,34 @@ export class strikerManager extends Component {
 
     start() {
 
+
+
+
     }
 
     update(deltaTime: number) {
-        // if (this.node.getComponent(RigidBody2D).linearVelocity.x == 0 && this.node.getComponent(RigidBody2D).linearVelocity.y == 0) {
-        //     this.node.setPosition(-348.94, -461.517);
-        // }
+
+
+        // this.blackTopRightCollider.getComponent(Collider2D).enable = true;
+        // this.blackTopRightCollider.addComponent(RigidBody2D)
+        // this.blackTopRightCollider.getComponent(RigidBody2D).gravityScale = 0;
+        // this.blackBottomLeftCollider.getComponent(Collider2D).enable = true;
+        // this.blackBottomLeftCollider.addComponent(RigidBody2D)
+        // this.blackBottomLeftCollider.getComponent(RigidBody2D).gravityScale = 0;
+        // this.blackBottomRightCollider.getComponent(Collider2D).enable = true;
+        // this.blackBottomRightCollider.addComponent(RigidBody2D)
+        // this.blackBottomRightCollider.getComponent(RigidBody2D).gravityScale = 0;
+
+        // this.blackTopLeftCollider.getComponent(Collider2D).enable = true;
+        // this.blackTopLeftCollider.addComponent(RigidBody2D)
+        // this.blackTopLeftCollider.getComponent(RigidBody2D).gravityScale = 0;
+        if (this.node.getComponent(RigidBody2D).linearVelocity.x == 0 && this.node.getComponent(RigidBody2D).linearVelocity.y == 0 && this.reposition) {
+            this.node.setPosition(-348.94, -461.517);
+            this.slider.getComponent(Slider).progress = 0;
+            this.node.angle = 0;
+            this.node.setScale(1, 1)
+            this.reposition = false;
+        }
     }
 }
 
