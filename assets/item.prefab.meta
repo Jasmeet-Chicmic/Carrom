@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "fa640415-94e6-4925-9dfa-b3ad63db9591",
+  "uuid": "da441ed2-0dbe-4f6e-810a-fd88b5fe3baa",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "dropDownItem"
+    "syncNodeName": "item"
   }
 }
