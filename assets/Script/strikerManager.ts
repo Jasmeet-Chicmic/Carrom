@@ -1,5 +1,6 @@
-import { BoxCollider2D, CircleCollider2D, Slider, Vec2, Collider2D } from 'cc';
+import { BoxCollider2D, CircleCollider2D, Slider, Vec2, Collider2D, AudioSource } from 'cc';
 import { _decorator, Component, Input, Node, RigidBody, RigidBody2D, Vec3, PhysicsSystem2D, EPhysics2DDrawFlags } from 'cc';
+import audioManagerObject from "./audioManager"
 const { ccclass, property } = _decorator;
 
 @ccclass('strikerManager')
@@ -47,6 +48,7 @@ export class strikerManager extends Component {
             this.cursorStartPos = event.getUILocation();
 
 
+
         } else if (event.type == 'touch-move') {
             this.cursorEndPos = event.getUILocation();
             // console.log(event.);
@@ -57,6 +59,7 @@ export class strikerManager extends Component {
 
 
         } else if (event.type == "touch-cancel") {
+            this.strikerAudio();
             this.TargetArea.setScale(0, 0);
             this.node.getComponent(RigidBody2D).linearVelocity = new Vec2(-this.xDifference * 0.2, -this.yDifference * 0.2);
             this.node.getChildByName('hover_rotating').active = false;
@@ -104,22 +107,17 @@ export class strikerManager extends Component {
 
     }
 
+
+    // striker audio
+    strikerAudio() {
+        let audio = this.node.getComponent(AudioSource);
+        audioManagerObject.loadAudioSource(audio);
+        audioManagerObject.play();
+
+    }
+
     update(deltaTime: number) {
 
-
-        // this.blackTopRightCollider.getComponent(Collider2D).enable = true;
-        // this.blackTopRightCollider.addComponent(RigidBody2D)
-        // this.blackTopRightCollider.getComponent(RigidBody2D).gravityScale = 0;
-        // this.blackBottomLeftCollider.getComponent(Collider2D).enable = true;
-        // this.blackBottomLeftCollider.addComponent(RigidBody2D)
-        // this.blackBottomLeftCollider.getComponent(RigidBody2D).gravityScale = 0;
-        // this.blackBottomRightCollider.getComponent(Collider2D).enable = true;
-        // this.blackBottomRightCollider.addComponent(RigidBody2D)
-        // this.blackBottomRightCollider.getComponent(RigidBody2D).gravityScale = 0;
-
-        // this.blackTopLeftCollider.getComponent(Collider2D).enable = true;
-        // this.blackTopLeftCollider.addComponent(RigidBody2D)
-        // this.blackTopLeftCollider.getComponent(RigidBody2D).gravityScale = 0;
         if (this.node.getComponent(RigidBody2D).linearVelocity.x == 0 && this.node.getComponent(RigidBody2D).linearVelocity.y == 0 && this.reposition) {
             this.node.setPosition(-348.94, -461.517);
             this.slider.getComponent(Slider).progress = 0;

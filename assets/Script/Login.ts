@@ -1,4 +1,4 @@
-import { _decorator, Component, director, EditBox, Input, Node } from 'cc';
+import { _decorator, Component, director, EditBox, Input, Node, } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login')
@@ -28,7 +28,28 @@ export class Login extends Component {
     fetchUserData() {
         let username = this.userName.getComponent(EditBox).string
         let password = this.password.getComponent(EditBox).string
-        this.userRequest(username, password)
+
+        // "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+        let userNameCheck = this.userNameValidation(username);
+        let passwordCheck = this.passwordValidation(password);
+        console.log(userNameCheck, passwordCheck);
+
+        if (userNameCheck && passwordCheck) {
+
+            this.userRequest(username, password)
+        } else {
+
+            if (!userNameCheck) {
+                console.log("Invalid Username");
+            } else if (!passwordCheck) {
+                console.log("Invalid Password");
+
+            }
+
+
+
+        }
+
     }
 
     userRequest(username, password) {
@@ -54,7 +75,7 @@ export class Login extends Component {
             }
             let data = xhttp.response
 
-            console.log(JSON.parse(data));
+            // console.log(JSON.parse(data));
             // console.log("hello");
 
 
@@ -65,9 +86,22 @@ export class Login extends Component {
 
 
         }
-        console.log(JSON.stringify(body));
+        // console.log(JSON.stringify(body));
 
         xhttp.send(JSON.stringify(body));
+    }
+
+
+
+    userNameValidation(input) {
+        let regex = new RegExp("[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?");
+
+        return regex.test(input)
+    }
+
+    passwordValidation(input) {
+        let regex = new RegExp("[0-9]");
+        return regex.test(input);
     }
 
     update(deltaTime: number) {
