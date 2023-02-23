@@ -1,4 +1,4 @@
-import { _decorator, Component, director, EditBox, Input, Node, } from 'cc';
+import { _decorator, Component, director, EditBox, Input, Label, Node, } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login')
@@ -12,8 +12,11 @@ export class Login extends Component {
     @property({ type: Node })
     logInButton: Node;
 
+    @property({ type: Node })
+    logInMessage: Node = null;
 
     onLoad(): void {
+        this.logInMessage.active = false;
         this.logInButton.on(Input.EventType.TOUCH_START, this.fetchUserData, this);
     }
     start() {
@@ -29,11 +32,15 @@ export class Login extends Component {
         if (userNameCheck && passwordCheck) {
             this.userRequest(username, password)
         } else {
-            if (!userNameCheck) {
-                console.log("Invalid Username");
-            } else if (!passwordCheck) {
-                console.log("Invalid Password");
 
+            if (!userNameCheck) {
+                this.logInMessage.active = true;
+                this.logInMessage.getComponent(Label).string = "Invalid Username";
+                setTimeout(() => { this.logInMessage.active = false; }, 1000)
+            } else if (!passwordCheck) {
+                this.logInMessage.active = true;
+                this.logInMessage.getComponent(Label).string = "Invalid Password";
+                setTimeout(() => { this.logInMessage.active = false; }, 1000)
             }
         }
 
