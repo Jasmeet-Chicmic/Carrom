@@ -7,16 +7,13 @@ export class puckManager extends Component {
 
     @property({ type: SpriteFrame })
     Puck_Colors: SpriteFrame[] = [];
-
-
+    
     start() {
 
     }
 
     changeColor = (name: puckColor) => {
-
         this.node.getComponent(Sprite).spriteFrame = this.Puck_Colors[name];
-
     }
 
     update(deltaTime: number) {

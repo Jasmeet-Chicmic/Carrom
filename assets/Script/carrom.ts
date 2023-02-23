@@ -23,7 +23,7 @@ export class carrom extends Component {
         let loader = this.node.getChildByName('loading icon- loader');
         tween(loader).by(0.1, { angle: -13 }).repeatForever().start();
         this.spriteArr = await resourceAllocator.preLoadResources();
-        this.fetchBackground();
+        // this.fetchBackground();
 
 
         //USED setTimeout for checking the loading screen, will remove it 
@@ -41,6 +41,7 @@ export class carrom extends Component {
     //FETCHING MAIN BACKGROUND
     fetchBackground() {
         let bg = this.spriteArr[resourceAllocator.assetIndex('bg')];
+        
         this.node.getComponent(Sprite).spriteFrame = bg;
 
     }

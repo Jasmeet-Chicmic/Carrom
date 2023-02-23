@@ -79,20 +79,17 @@ export class Registration extends Component {
     dropDown() {
 
         this.scrollView.active = true;
-        console.log("chal riha");
         let scrollViewArr = this.scrollView.children;
         if (!this.dropDownCheck) {
             this.crossIcon.active = true;
             this.dropDownIcon.active = false;
             tween(this.scrollView)
                 .to(0, { scale: new Vec3(1, 0.6, 0) })
-
                 .to(0.0462, { scale: new Vec3(1, 1, 1) })
                 .to(0.0462, { scale: new Vec3(1, 1.06, 1) })
                 .to(0.066, { scale: new Vec3(1, 1, 1) })
                 .to(0.099, { scale: new Vec3(1, 1.15, 1) })
                 .start();
-            // this.scrollView.setScale(1, 1);
             scrollViewArr.map((e) => {
                 e.setScale(1, 1);
             })

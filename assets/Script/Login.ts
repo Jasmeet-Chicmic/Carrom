@@ -17,37 +17,24 @@ export class Login extends Component {
         this.logInButton.on(Input.EventType.TOUCH_START, this.fetchUserData, this);
     }
     start() {
-        // this.fetchUserData();
-        // this.userRequest();
-
-
-
     }
 
 
     fetchUserData() {
         let username = this.userName.getComponent(EditBox).string
         let password = this.password.getComponent(EditBox).string
-
-        // "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
         let userNameCheck = this.userNameValidation(username);
         let passwordCheck = this.passwordValidation(password);
         console.log(userNameCheck, passwordCheck);
-
         if (userNameCheck && passwordCheck) {
-
             this.userRequest(username, password)
         } else {
-
             if (!userNameCheck) {
                 console.log("Invalid Username");
             } else if (!passwordCheck) {
                 console.log("Invalid Password");
 
             }
-
-
-
         }
 
     }
@@ -69,25 +56,12 @@ export class Login extends Component {
         xhttp.setRequestHeader("apiKey", apiKey);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.onreadystatechange = () => {
-            // console.log(xhttp.response);
             if (xhttp.readyState != 4) {
                 return;
             }
             let data = xhttp.response
-
-            // console.log(JSON.parse(data));
-            // console.log("hello");
-
-
-
-            director.loadScene("CarromBoard");
-
-            // console.log(xhttp.readyState);
-
-
+            director.loadScene("Welcome");
         }
-        // console.log(JSON.stringify(body));
-
         xhttp.send(JSON.stringify(body));
     }
 
@@ -95,7 +69,6 @@ export class Login extends Component {
 
     userNameValidation(input) {
         let regex = new RegExp("[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?");
-
         return regex.test(input)
     }
 

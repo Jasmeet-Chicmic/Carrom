@@ -51,11 +51,10 @@ export class strikerManager extends Component {
 
         } else if (event.type == 'touch-move') {
             this.cursorEndPos = event.getUILocation();
-            // console.log(event.);
             this.yDifference = this.cursorEndPos.y - this.cursorStartPos.y;
             this.xDifference = this.cursorEndPos.x - this.cursorStartPos.x;
             this.angle = Math.atan2(this.yDifference, this.xDifference) * 180 / Math.PI + 90;
-            // console.log();
+          
 
 
         } else if (event.type == "touch-cancel") {
@@ -83,16 +82,9 @@ export class strikerManager extends Component {
 
             if (distance * 0.007 < 1 && distance * 0.007 > -1) {
                 this.TargetArea.setScale(distance * 0.007, distance * 0.007)
-
                 this.TargetArea.getChildByName('target_area').setScale(distance * 0.007, distance * 0.007)
-
             }
-
-
-
-            this.TargetArea.angle = this.angle;
-
-
+          this.TargetArea.angle = this.angle;
         }
 
 

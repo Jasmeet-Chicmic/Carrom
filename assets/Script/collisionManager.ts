@@ -1,8 +1,9 @@
-import { _decorator, Collider2D, Component, Enum, Node, Contact2DType, IPhysics2DContact, physics, NodePool, UITransform, Vec3, Vec2, tween, RigidBody2D, sys, Label, Prefab, instantiate } from 'cc';
+import { _decorator, Collider2D, Component, Enum, Node, Contact2DType, IPhysics2DContact, physics, NodePool, UITransform, Vec3, Vec2, tween, RigidBody2D, sys, Label, Prefab, instantiate, AudioSource } from 'cc';
 import { colliderType } from './puckSelector';
 import { puckColor } from './puckSelector';
 import { puckManager } from './puckManager';
 import { Player } from './Player';
+import audioManagerObject from './audioManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('collisionManager')
@@ -52,6 +53,9 @@ export class collisionManager extends Component {
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         if (otherCollider.node.name === "striker") {
+            let audio = selfCollider.getComponent(AudioSource);
+            audioManagerObject.loadAudioSource(audio);
+            audioManagerObject.play();
             otherCollider.node.setScale(0, 0);
             otherCollider.node.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0)
             console.log(otherCollider.node.scale);
@@ -63,6 +67,11 @@ export class collisionManager extends Component {
 
 
         } else if (otherCollider.node.name === "BLACK") {
+
+            let audio = selfCollider.getComponent(AudioSource);
+            audioManagerObject.loadAudioSource(audio);
+            audioManagerObject.play();
+
             console.log("Black ");
 
             this.black_count++;
@@ -82,6 +91,9 @@ export class collisionManager extends Component {
 
         } else if (otherCollider.node.name === "WHITE") {
             // console.log("White");
+            let audio = selfCollider.getComponent(AudioSource);
+            audioManagerObject.loadAudioSource(audio);
+            audioManagerObject.play();
 
             this.white_count++;
             tween(otherCollider.node)
@@ -94,18 +106,10 @@ export class collisionManager extends Component {
             setTimeout(() => {
                 otherCollider.node.destroy();
             }, 10)
-            // setTimeout(() => {
-            //     selfCollider.enabled = false;
-            //     selfCollider.getComponent(RigidBody2D).destroy();
-            //     // otherCollider.enabled = false;
-            //     // otherCollider.getComponent(RigidBody2D).destroy();
-
-            // });
-
-
-
-
         } else {
+            let audio = selfCollider.getComponent(AudioSource);
+            audioManagerObject.loadAudioSource(audio);
+            audioManagerObject.play();
             this.red++;
             tween(otherCollider.node)
                 .to(0.7, { position: otherCollider.node.getPosition() })
@@ -116,18 +120,7 @@ export class collisionManager extends Component {
             setTimeout(() => {
                 otherCollider.node.destroy();
             }, 10)
-            // setTimeout(() => {
-
-
-
-            //     selfCollider.enabled = false;
-            //     selfCollider.getComponent(RigidBody2D).destroy();
-            //     // otherCollider.enabled = false;
-            //     // otherCollider.getComponent(RigidBody2D).destroy();
-
-            // });
-
-
+            
         }
 
 
